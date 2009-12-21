@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Hah, this script used to be a combination of find, exif -t, basename, rename and mkdir commands.  Exiftool really is a lifesaver here:
+exiftool '-Directory<DateTimeOriginal' -d %Y/%m/%d ${1:-.}

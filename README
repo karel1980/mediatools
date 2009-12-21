@@ -1,0 +1,10 @@
+
+###############
+
+(requires exiftool - apt-get install exiftool)
+
+#
+# Classify the given directory into a year/month/day structure
+# month and day are zero-padded if < 10
+ymd <dir>
+
