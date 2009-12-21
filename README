@@ -8,3 +8,6 @@
 # month and day are zero-padded if < 10
 ymd <dir>
 
+# Todo: find out use of -ovc frameno
+
+mencoder-wrapper
