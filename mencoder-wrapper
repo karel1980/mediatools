@@ -23,6 +23,8 @@ aopts="-oac mp3lame -lameopts abr:br=128"
 [ -e $target -a -z "$force" ] && echo "target $target exists, use -f to force" && exit
 
 # first pass
+tmp=`mktemp --tmpdir=$dir`
 mencoder -oac copy -ovc lavc -lavcopts vcodec=msmpeg4v2:vpass=1:$vopt -nosound -o /dev/null $1
 # second pass
-mencoder -ovc lavc -lavcopts vcodec=msmpeg4v2:vpass=2:$vopt $aopts -o $target $1
+mencoder -ovc lavc -lavcopts vcodec=msmpeg4v2:vpass=2:$vopt $aopts -o $tmp $1
+mv $tmp $target
