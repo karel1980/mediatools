@@ -2,7 +2,7 @@
 
 vopt="vbitrate=2160000:mbd=2:keyint=132:vqblur=1.0:cmp=2:subcmp=2:dia=2:mv0:last_pred=3"
 
-aopts="-oac mp3lame -lameopts=abr:br=128"
+aopts="-oac mp3lame -lameopts abr:br=128"
 
 # first pass
 mencoder -oac copy -ovc lavc -lavcopts vcodec=msmpeg4v2:vpass=1:$vopt -nosound -o /dev/null $1
