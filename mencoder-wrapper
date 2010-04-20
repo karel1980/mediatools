@@ -1,30 +1,10 @@
 #!/bin/bash
 
-while getopts "hf" OPTION
-do
-  case $OPTION in
-    h) echo "TODO: usage info"; exit;;
-    f) force=true;;
-  esac
-done
-
-shift $[OPTIND-1]
-
-dir=`dirname $1`
-baseext=`basename $1`
-base=${baseext%.*}
-
-target=$dir/${base}.avi
-
 vopt="vbitrate=2160000:mbd=2:keyint=132:vqblur=1.0:cmp=2:subcmp=2:dia=2:mv0:last_pred=3"
 
-aopts="-oac mp3lame -lameopts abr:br=128"
-
-[ -e $target -a -z "$force" ] && echo "target $target exists, use -f to force" && exit
+aopts="-oac mp3lame -lameopts=abr:br=128"
 
 # first pass
-tmp=`mktemp --tmpdir=$dir`
 mencoder -oac copy -ovc lavc -lavcopts vcodec=msmpeg4v2:vpass=1:$vopt -nosound -o /dev/null $1
 # second pass
-mencoder -ovc lavc -lavcopts vcodec=msmpeg4v2:vpass=2:$vopt $aopts -o $tmp $1
-mv $tmp $target
+mencoder $aopts -ovc lavc -lavcopts vcodec=msmpeg4v2:vpass=2:$vopt -o `basename $1 .MOV`.avi $1
